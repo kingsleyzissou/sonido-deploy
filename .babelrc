@@ -1,0 +1,28 @@
+{
+  "env": {
+    "test": {
+      "plugins": [
+        [
+          "module-resolver",
+          {
+            "root": ["."],
+            "alias": {
+              "@": ".",
+              "~": "."
+    ***REMOVED***
+  ***REMOVED***
+    ***REMOVED***
+  ***REMOVED***
+      "presets": [
+        [
+          "@babel/preset-env",
+          {
+            "targets": {
+              "node": "current"
+    ***REMOVED***
+  ***REMOVED***
+    ***REMOVED***
+  ***REMOVED***
+***REMOVED***
+***REMOVED***
+***REMOVED***
