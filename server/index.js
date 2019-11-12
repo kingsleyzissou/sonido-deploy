@@ -1,6 +1,6 @@
 const express = require('express')
 const consola = require('consola')
-const { Nuxt, Builder ***REMOVED*** = require('nuxt')
+const { Nuxt, Builder } = require('nuxt')
 const app = express()
 
 // Import and Set Nuxt.js options
@@ -11,15 +11,15 @@ async function start () {
   // Init Nuxt.js
   const nuxt = new Nuxt(config)
 
-  const { host, port ***REMOVED*** = nuxt.options.server
+  const { host, port } = nuxt.options.server
 
   // Build only in dev mode
   if (config.dev) {
     const builder = new Builder(nuxt)
     await builder.build()
-***REMOVED*** else {
+  } else {
     await nuxt.ready()
-***REMOVED***
+  }
 
   // Give nuxt middleware to express
   app.use(nuxt.render)
@@ -27,8 +27,8 @@ async function start () {
   // Listen the server
   app.listen(port, host)
   consola.ready({
-    message: `Server listening on http://${host***REMOVED***:${port***REMOVED***`,
+    message: `Server listening on http://${host}:${port}`,
     badge: true
-***REMOVED***)
-***REMOVED***
+  })
+}
 start()

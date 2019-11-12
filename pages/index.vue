@@ -1,72 +1,42 @@
 <template>
-  <div class="container">
-    <div>
-      <logo />
-      <h1 class="title">
-        spotify-client
-      </h1>
-      <h2 class="subtitle">
-        Spotify assignment
-      </h2>
-      <div class="links">
-        <a
-          href="https://nuxtjs.org/"
-          target="_blank"
-          class="button--green"
-        >
-          Documentation
-        </a>
-        <a
-          href="https://github.com/nuxt/nuxt.js"
-          target="_blank"
-          class="button--grey"
-        >
-          GitHub
-        </a>
+  <div>
+    <Navbar></Navbar>
+    <section class="hero is-black has-bg-img is-fullheight">
+      <!-- Hero head: will stick at the top -->
+
+      <!-- Hero content: will be in the middle -->
+      <div class="hero-body">
+        <div class="container has-text-centered">
+          <h1 class="title">Welcome to Webmark.io</h1>
+          <h2
+            class="subtitle"
+          >The easiest way to keep your bookmarks organised and up to date. Bookmark.io is a web app designed to help you keep track of your bookmarks in an easy and efficient way.</h2>
+          <a class="button is-primary is-medium is-inverted is-outlined">Get Started</a>
+        </div>
       </div>
-    </div>
+
+      <!-- Hero footer: will stick at the bottom -->
+      <div class="hero-foot"></div>
+    </section>
   </div>
 </template>
 
 <script>
-import Logo from '~/components/Logo.vue'
-
+import Navbar from "~/components/Navbar";
 export default {
   components: {
-    Logo
-***REMOVED***
-***REMOVED***
+    Navbar
+  },
+  auth: false,
+  mounted() {
+    // console.log(this.$state);
+    console.log(this.$auth);
+  }
+};
 </script>
 
-<style>
-.container {
-  margin: 0 auto;
-  min-height: 100vh;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  text-align: center;
-***REMOVED***
-
-.title {
-  font-family: 'Quicksand', 'Source Sans Pro', -apple-system, BlinkMacSystemFont,
-    'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-  display: block;
-  font-weight: 300;
-  font-size: 100px;
-  color: #35495e;
-  letter-spacing: 1px;
-***REMOVED***
-
-.subtitle {
-  font-weight: 300;
-  font-size: 42px;
-  color: #526488;
-  word-spacing: 5px;
-  padding-bottom: 15px;
-***REMOVED***
-
-.links {
-  padding-top: 15px;
-***REMOVED***
+<style scoped>
+.is-black {
+  background-color: #222;
+}
 </style>

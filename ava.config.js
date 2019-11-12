@@ -1,9 +1,9 @@
 export default {
   require: ['./test/ava.setup.js'],
-  sources: ['**/*.{js,vue***REMOVED***'],
+  sources: ['**/*.{js,vue}'],
   babel: {
     testOptions: {
-    ***REMOVED***
+      plugins: [
         [
           'module-resolver',
           {
@@ -11,12 +11,12 @@ export default {
             alias: {
               '@': '.',
               '~': '.'
-    ***REMOVED***
-  ***REMOVED***
-    ***REMOVED***
-  ***REMOVED***
-***REMOVED***
-***REMOVED***
+            }
+          }
+        ]
+      ]
+    }
+  },
   tap: true,
   verbose: true
-***REMOVED***
+}

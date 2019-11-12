@@ -15,14 +15,14 @@ html {
   -moz-osx-font-smoothing: grayscale;
   -webkit-font-smoothing: antialiased;
   box-sizing: border-box;
-***REMOVED***
+}
 
 *,
 *:before,
 *:after {
   box-sizing: border-box;
   margin: 0;
-***REMOVED***
+}
 
 .button--green {
   display: inline-block;
@@ -31,12 +31,12 @@ html {
   color: #3b8070;
   text-decoration: none;
   padding: 10px 30px;
-***REMOVED***
+}
 
 .button--green:hover {
   color: #fff;
   background-color: #3b8070;
-***REMOVED***
+}
 
 .button--grey {
   display: inline-block;
@@ -46,10 +46,10 @@ html {
   text-decoration: none;
   padding: 10px 30px;
   margin-left: 15px;
-***REMOVED***
+}
 
 .button--grey:hover {
   color: #fff;
   background-color: #35495e;
-***REMOVED***
+}
 </style>
