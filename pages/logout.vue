@@ -1,7 +1,7 @@
 <template>
-  <div>
+  <fragment>
     <h1>Logged out</h1>
-  </div>
+  </fragment>
 </template>
 
 <script>

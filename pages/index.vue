@@ -1,10 +1,7 @@
 <template>
-  <div>
+  <fragment>
     <Navbar></Navbar>
     <section class="hero is-black has-bg-img is-fullheight">
-      <!-- Hero head: will stick at the top -->
-
-      <!-- Hero content: will be in the middle -->
       <div class="hero-body">
         <div class="container has-text-centered">
           <h1 class="title">Welcome to Webmark.io</h1>
@@ -14,11 +11,9 @@
           <a class="button is-primary is-medium is-inverted is-outlined">Get Started</a>
         </div>
       </div>
-
-      <!-- Hero footer: will stick at the bottom -->
       <div class="hero-foot"></div>
     </section>
-  </div>
+  </fragment>
 </template>
 
 <script>
