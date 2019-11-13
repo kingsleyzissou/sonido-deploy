@@ -18,19 +18,30 @@
     "@nuxtjs/axios": "^5.8.0",
     "@nuxtjs/bulma": "^1.2.1",
     "@nuxtjs/dotenv": "^1.4.1",
+    "chart.js": "^2.9.2",
     "cross-env": "^5.2.0",
     "express": "^4.16.4",
     "nuxt": "^2.0.0",
-    "vue-fragment": "^1.5.1"
+    "sass": "^1.23.3",
+    "vue-chartjs": "^3.5.0",
+    "vue-clickaway": "^2.2.2",
+    "vue-fragment": "^1.5.1",
+    "vue-github-buttons": "^3.1.0",
+    "vue-i18n": "^8.15.0",
+    "vue-social-sharing": "^2.4.6",
+    "vue2-transitions": "^0.3.0"
   },
   "devDependencies": {
     "@vue/test-utils": "^1.0.0-beta.27",
     "ava": "^2.2.0",
     "babel-plugin-module-resolver": "^3.2.0",
     "browser-env": "^3.2.5",
+    "eslint-loader": "^3.0.2",
+    "node-sass": "^4.9.0",
     "nodemon": "^1.18.9",
     "require-extension-hooks": "^0.3.3",
     "require-extension-hooks-babel": "^1.0.0",
-    "require-extension-hooks-vue": "^2.0.0"
+    "require-extension-hooks-vue": "^2.0.0",
+    "sass-loader": "^8.0.0"
   }
 }

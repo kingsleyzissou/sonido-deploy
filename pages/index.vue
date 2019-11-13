@@ -1,6 +1,6 @@
 <template>
   <fragment>
-    <Navbar></Navbar>
+    <!-- <Navbar></Navbar> -->
     <section class="hero is-black has-bg-img is-fullheight">
       <div class="hero-body">
         <div class="container has-text-centered">
@@ -17,10 +17,10 @@
 </template>
 
 <script>
-import Navbar from "~/components/Navbar";
+// import Navbar from "~/components/Navbar";
 export default {
   components: {
-    Navbar
+    // Navbar
   },
   auth: false,
   mounted() {

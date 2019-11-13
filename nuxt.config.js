@@ -29,7 +29,9 @@ module.exports = {
   ** Plugins to load before mounting the App
   */
   plugins: [
-    '~/plugins/fragment'
+    '~/plugins/config',
+    '~/plugins/fragment',
+    '~/plugins/dashboard',
   ],
   /*
   ** Nuxt.js dev-modules
@@ -41,7 +43,7 @@ module.exports = {
   ** Nuxt.js modules
   */
   modules: [
-    '@nuxtjs/bulma',
+    // '@nuxtjs/bulma',
     '@nuxtjs/axios',
     '@nuxtjs/auth',
   ],
