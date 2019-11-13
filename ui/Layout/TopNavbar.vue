@@ -65,7 +65,7 @@
                 placeholder="SEARCH"
               />
             </modal>
-            <dropdown tag="li" menu-on-right title-tag="a" class="nav-item">
+            <!-- <dropdown tag="li" menu-on-right title-tag="a" class="nav-item">
               <a
                 slot="title"
                 href="#"
@@ -92,7 +92,7 @@
               <li class="nav-link">
                 <a href="#" class="nav-item dropdown-item">Another one</a>
               </li>
-            </dropdown>
+            </dropdown>-->
             <dropdown
               tag="li"
               menu-on-right
@@ -122,7 +122,7 @@
               </li>
               <div class="dropdown-divider"></div>
               <li class="nav-link">
-                <a href="#" class="nav-item dropdown-item">Log out</a>
+                <a href="/logout" class="nav-item dropdown-item">Log out</a>
               </li>
             </dropdown>
           </ul>
@@ -133,7 +133,7 @@
 </template>
 <script>
 import { CollapseTransition } from "vue2-transitions";
-import Modal from "~/components/Modal";
+import Modal from "~/ui/Modal";
 
 export default {
   components: {

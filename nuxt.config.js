@@ -106,6 +106,8 @@ module.exports = {
           'user-read-recently-played',
           'user-read-currently-playing',
           'user-read-playback-state',
+          'user-follow-modify',
+          'user-follow-read',
           'user-top-read'
         ],
         access_type: undefined,

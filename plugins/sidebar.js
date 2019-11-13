@@ -1,5 +1,5 @@
-import Sidebar from "~/components/SideBar/SideBar";
-import SidebarLink from "~/components/SideBar/SidebarLink";
+import Sidebar from "~/ui/SideBar/SideBar";
+import SidebarLink from "~/ui/SideBar/SidebarLink";
 
 const SidebarStore = {
   showSidebar: false,

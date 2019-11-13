@@ -1,4 +1,4 @@
-import Notifications from '~/components/Notification/Notifications';
+import Notifications from '~/ui/Notification/Notifications';
 
 const NotificationStore = {
   state: [], // here the notifications will be added

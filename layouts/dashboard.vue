@@ -7,6 +7,7 @@
       </template>
     </side-bar>
     <div class="main-panel" data="green">
+      <notifications></notifications>
       <top-navbar></top-navbar>
 
       <dashboard-content @click.native="toggleSidebar"></dashboard-content>
@@ -18,10 +19,10 @@
 <style lang="scss">
 </style>
 <script>
-import TopNavbar from "~/components/Layout/TopNavbar.vue";
-import ContentFooter from "~/components/Layout/ContentFooter.vue";
-import DashboardContent from "~/components/Layout/Content.vue";
-import MobileMenu from "~/components/Layout/MobileMenu";
+import TopNavbar from "~/ui/Layout/TopNavbar.vue";
+import ContentFooter from "~/ui/Layout/ContentFooter.vue";
+import DashboardContent from "~/ui/Layout/Content.vue";
+import MobileMenu from "~/ui/Layout/MobileMenu";
 export default {
   components: {
     TopNavbar,
