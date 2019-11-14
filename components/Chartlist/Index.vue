@@ -19,7 +19,6 @@ export default {
   async mounted() {
     this.$axios.$get("/browse/categories/").then(({ categories }) => {
       const { items } = categories;
-      console.log(items);
       this.charts = items;
     });
   },

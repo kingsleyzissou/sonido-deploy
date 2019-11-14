@@ -1,0 +1,7 @@
+@import "black-dashboard";
+
+.badge.badge-outline.badge-secondary {
+  border:$secondary 1px solid;
+  color: $secondary;
+  background-color: transparent
+}

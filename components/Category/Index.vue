@@ -22,7 +22,6 @@ export default {
       .$get(`/browse/categories/${this.id}/playlists`)
       .then(({ playlists }) => {
         const { items } = playlists;
-        console.log(items);
         this.list = items;
       });
   },

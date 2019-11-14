@@ -17,16 +17,8 @@
 </template>
 
 <script>
-// import Navbar from "~/components/Navbar";
 export default {
-  components: {
-    // Navbar
-  },
-  auth: false,
-  mounted() {
-    // console.log(this.$state);
-    console.log(this.$auth);
-  }
+  auth: false
 };
 </script>
 

@@ -26,7 +26,6 @@ export default {
   },
   async asyncData({ $axios, params }) {
     const { data } = await $axios.get(`/playlists/${params.id}`);
-    console.log(data);
     return data;
   }
 };

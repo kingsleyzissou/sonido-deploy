@@ -43,9 +43,8 @@ module.exports = {
   ** Nuxt.js modules
   */
   modules: [
-    // '@nuxtjs/bulma',
     '@nuxtjs/axios',
-    '@nuxtjs/auth',
+    '@nuxtjs/auth'
   ],
   /*
   ** Build configuration
@@ -69,7 +68,8 @@ module.exports = {
   */
   env: {
     SPOTIFY_ID: process.env.SPOTIFY_CLIENT_ID,
-    SPOTIFY_SECRET: process.env.SPOTIFY_CLIENT_SECRET
+    SPOTIFY_SECRET: process.env.SPOTIFY_CLIENT_SECRET,
+    LASTFM_KEY: process.env.LASTFM_KEY
   },
   /*
   ** Axios configuration

@@ -6,7 +6,7 @@ import GlobalComponents from "./components";
 import GlobalDirectives from "./directives";
 
 //css assets
-import "~/assets/scss/black-dashboard.scss";
+import "~/assets/scss/app.scss";
 import "~/assets/css/nucleo-icons.css";
 import "~/assets/css/nucleo-demo.css";
 import "~/assets/demo/demo.css";

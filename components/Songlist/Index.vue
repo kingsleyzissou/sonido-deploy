@@ -16,40 +16,59 @@
             </thead>
             <tbody>
               <tr v-for="(song, index) in songs" :key="index">
-                <td>
-                  <i class="tim-icons icon-triangle-right-17"></i>
-                </td>
-                <td>{{song.track.name}}</td>
-                <td>
-                  <span v-html="$options.filters.stringify(song.track.artists)"></span>
-                </td>
-                <td>{{song.track.album.name}}</td>
-                <td>
-                  <dropdown
-                    menu-on-right
-                    title-tag="a"
-                    class="nav-item"
-                    menu-classes="dropdown-navbar"
-                  >
-                    <a slot="title" data-toggle="dropdown" aria-expanded="true">
-                      <button type="button" class="toggler">
-                        <span class="toggler-bar toggler-kebab"></span>
-                        <span class="toggler-bar toggler-kebab"></span>
-                        <span class="toggler-bar toggler-kebab"></span>
-                      </button>
-                    </a>
-                    <li class="nav-link">
-                      <a href="#" class="nav-item dropdown-item">View artist</a>
-                    </li>
-                    <li class="nav-link">
-                      <a href="#" class="nav-item dropdown-item">View album</a>
-                    </li>
-                    <li class="nav-link">
-                      <a href="#" class="nav-item dropdown-item">Add to playlist</a>
-                    </li>
-                  </dropdown>
-                </td>
-                <td>{{song.track.duration_ms | duration}}</td>
+                <template v-if="song.track">
+                  <td>
+                    <i class="tim-icons icon-triangle-right-17"></i>
+                  </td>
+                  <td>
+                    {{song.track.name}}&nbsp;
+                    <span
+                      v-if="song.track.explicit"
+                      class="badge badge-outline badge-secondary"
+                    >Explicit</span>
+                  </td>
+                  <td>
+                    <span v-html="$options.filters.stringify(song.track.artists)"></span>
+                  </td>
+                  <td>
+                    <nuxt-link
+                      :to="`/albums/${song.track.album.id}`"
+                      class="text-primary"
+                    >{{song.track.album.name}}</nuxt-link>
+                  </td>
+                  <td>
+                    <dropdown
+                      menu-on-right
+                      title-tag="a"
+                      class="nav-item"
+                      menu-classes="dropdown-navbar"
+                    >
+                      <a slot="title" data-toggle="dropdown" aria-expanded="true">
+                        <button type="button" class="toggler">
+                          <span class="toggler-bar toggler-kebab"></span>
+                          <span class="toggler-bar toggler-kebab"></span>
+                          <span class="toggler-bar toggler-kebab"></span>
+                        </button>
+                      </a>
+                      <li class="nav-link">
+                        <a
+                          :href="`/artists/${song.track.artists[0].id}`"
+                          class="nav-item dropdown-item"
+                        >View artist</a>
+                      </li>
+                      <li class="nav-link">
+                        <a
+                          :href="`/albums/${song.track.album.id}`"
+                          class="nav-item dropdown-item"
+                        >View album</a>
+                      </li>
+                      <li class="nav-link">
+                        <a href="#" class="nav-item dropdown-item">Add to playlist</a>
+                      </li>
+                    </dropdown>
+                  </td>
+                  <td>{{song.track.duration_ms | duration}}</td>
+                </template>
               </tr>
             </tbody>
           </table>
@@ -72,9 +91,6 @@ export default {
   components: {
     Table
   },
-  mounted() {
-    console.log(this.songs[0].track);
-  },
   filters: {
     stringify(artists) {
       const keys = artists.length;
@@ -93,7 +109,6 @@ export default {
 
 <style scoped>
 .card:hover > .card-img {
-  /* scale(1.2,1.2) */
   opacity: 0.5;
 }
 
