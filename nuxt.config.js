@@ -32,6 +32,7 @@ module.exports = {
     '~/plugins/config',
     '~/plugins/fragment',
     '~/plugins/dashboard',
+    '~/plugins/spinners',
   ],
   /*
   ** Nuxt.js dev-modules

@@ -18,12 +18,11 @@
     "@nuxtjs/axios": "^5.8.0",
     "@nuxtjs/bulma": "^1.2.1",
     "@nuxtjs/dotenv": "^1.4.1",
+    "@saeris/vue-spinners": "^1.0.8",
     "chart.js": "^2.9.2",
-    "colorify": "^0.2.0",
     "colorthief": "^2.3.0",
     "cross-env": "^5.2.0",
     "express": "^4.16.4",
-    "fs": "^0.0.1-security",
     "moment": "^2.24.0",
     "node-vibrant": "^3.1.4",
     "numbro": "^2.1.2",
@@ -32,9 +31,6 @@
     "vue-chartjs": "^3.5.0",
     "vue-clickaway": "^2.2.2",
     "vue-fragment": "^1.5.1",
-    "vue-github-buttons": "^3.1.0",
-    "vue-i18n": "^8.15.0",
-    "vue-social-sharing": "^2.4.6",
     "vue2-transitions": "^0.3.0"
   },
   "devDependencies": {

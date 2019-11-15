@@ -44,6 +44,7 @@
                 id="search-button"
                 data-toggle="modal"
                 data-target="#searchModal"
+                v-if="$auth.loggedIn"
               >
                 <i class="tim-icons icon-zoom-split"></i>
               </button>
@@ -65,34 +66,13 @@
                 placeholder="SEARCH"
               />
             </modal>
-            <!-- <dropdown tag="li" menu-on-right title-tag="a" class="nav-item">
-              <a
-                slot="title"
-                href="#"
-                class="dropdown-toggle nav-link"
-                data-toggle="dropdown"
-                aria-expanded="true"
-              >
-                <span class="notification d-none d-lg-block d-xl-block"></span>
-                <i class="tim-icons icon-bulb-63"></i>
-                <span class="d-lg-none">New Notifications</span>
-              </a>
-              <li class="nav-link">
-                <a href="#" class="nav-item dropdown-item">Mike John responded to your email</a>
-              </li>
-              <li class="nav-link">
-                <a href="#" class="nav-item dropdown-item">You have 5 more tasks</a>
-              </li>
-              <li class="nav-link">
-                <a href="#" class="nav-item dropdown-item">Your friend Michael is in town</a>
-              </li>
-              <li class="nav-link">
-                <a href="#" class="nav-item dropdown-item">Another notification</a>
-              </li>
-              <li class="nav-link">
-                <a href="#" class="nav-item dropdown-item">Another one</a>
-              </li>
-            </dropdown>-->
+            <li class="nav-item">
+              <button
+                @click="login"
+                class="btn btn-sm btn-primary btn-simple"
+                v-if="!$auth.loggedIn"
+              >Log In</button>
+            </li>
             <dropdown
               tag="li"
               menu-on-right
@@ -122,7 +102,7 @@
               </li>
               <div class="dropdown-divider"></div>
               <li class="nav-link">
-                <a href="/logout" class="nav-item dropdown-item">Log out</a>
+                <a href="#" @click.prevent="logout" class="nav-item dropdown-item">Log out</a>
               </li>
             </dropdown>
           </ul>
@@ -151,10 +131,17 @@ export default {
       activeNotifications: false,
       showMenu: false,
       searchModalVisible: false,
+      loginModalVisible: false,
       searchQuery: ""
     };
   },
   methods: {
+    login() {
+      this.$auth.loginWith("spotify");
+    },
+    logout() {
+      this.$auth.logout();
+    },
     capitalizeFirstLetter(string) {
       return string.charAt(0).toUpperCase() + string.slice(1);
     },
