@@ -5,10 +5,10 @@
         <div
           class="card-image gradient-overlay"
           :style="{
-            backgroundSize: 'auto 400px',
+              backgroundSize: 'auto 400px',
               backgroundPosition: 'top right',
               backgroundRepeat: 'no-repeat',
-              backgroundImage: `linear-gradient(to right, ${hex} 55%, rgba(0,0,0,0)), url(${artist.images[0].url})`,
+              backgroundImage: `linear-gradient(to right, ${hex} 55%, rgba(0,0,0,0)), url(${image})`,
             }"
         ></div>
         <div class="card-img-overlay h-100 d-flex flex-column justify-content-end">
@@ -37,23 +37,29 @@ export default {
       loading: true,
       data: {
         following: false,
-        hex: ""
+        hex: "",
+        image: ""
       }
     };
   },
   async mounted() {
+    console.log(this.artist);
+    let image =
+      this.artist.images.length > 0
+        ? this.artist.images[0].url
+        : "http://localhost:3000/img/placeholder-square.png";
     const [following, hex] = await Promise.all([
       this.$axios.get(
         `/me/following/contains?type=artist&ids=${this.artist.id}`
       ),
       this.$axios.get("http://localhost:3000/api/image", {
         params: {
-          image: this.artist.images[0].url
+          image: image
         }
       })
     ]);
     this.loading = false;
-    this.data = { following: following.data[0], hex: hex.data };
+    this.data = { following: following.data[0], hex: hex.data, image };
   },
   methods: {
     async follow() {
@@ -88,6 +94,9 @@ export default {
     },
     hex() {
       return this.data.hex;
+    },
+    image() {
+      return this.data.image;
     }
   },
   filters: {

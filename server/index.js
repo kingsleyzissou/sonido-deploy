@@ -5,6 +5,7 @@ const colorthief = require('colorthief')
 const bodyParser = require('body-parser')
 const app = express()
 
+
 // Import and Set Nuxt.js options
 const config = require('../nuxt.config.js')
 config.dev = process.env.NODE_ENV !== 'production'
@@ -38,8 +39,10 @@ async function start() {
   app.get('/api/image', async (req, res) => {
     const { image } = req.query
     const colors = await colorthief.getColor(image)
+      .catch(err => { throw new Error(err.message) })
     res.send(toHex(colors))
   })
+
   // Give nuxt middleware to express
   app.use(nuxt.render)
 

@@ -6,19 +6,20 @@
           <div class="card-body">
             <div class="d-flex align-items-end">
               <div class="mr-4" style="width: 275px; height: 100%">
-                <img :src="album.images[0].url" alt="Album cover" />
+                <img :src="playlist.images[0].url" alt="Album cover" />
               </div>
               <div class="mr-2">
-                <h6 class="mb-0">Album</h6>
-                <h2 class="album-title">{{album.name}}</h2>
+                <h6 class="mb-0">Playlist</h6>
+                <h2 class="album-title">{{playlist.name}}</h2>
+                <p class="card-text">{{playlist.description}}</p>
                 <span>by</span>
-                <h6 class="muted" v-html="$options.filters.stringify(album.artists)"></h6>
-                <ul class="list-inline mb-0">
-                  <li class="list-inline-item">{{ album.release_date | getYear }}&nbsp;&nbsp;|</li>
-                  <li class="list-inline-item">{{ album.total_tracks | pluralise }}&nbsp;&nbsp;|</li>
-                  <li class="list-inline-item">{{ album.tracks.items | getDuration }}</li>
+                <h6 class="muted">
+                  <nuxt-link :to="`/profile/${playlist.owner.id}`">{{ playlist.owner.display_name }}</nuxt-link>
+                </h6>
+                <ul class="list-inline mb-2">
+                  <li class="list-inline-item">{{ playlist.tracks.items.length | pluralise }}</li>
                 </ul>
-                <button class="btn btn-primary">Stuff</button>
+                <button class="btn btn-primary">Play</button>
               </div>
             </div>
           </div>
@@ -36,7 +37,7 @@ const createArtistLink = artist => {
 };
 
 export default {
-  props: ["album"],
+  props: ["playlist"],
   filters: {
     pluralise(total) {
       if (total == 1) return "1 song";
@@ -45,13 +46,6 @@ export default {
     getYear(date) {
       let d = moment(date, "YYYY-MM-DD");
       return d.year();
-    },
-    getDuration(tracks) {
-      let total = tracks.reduce(
-        (total, track) => (total = total + track.duration_ms),
-        0
-      );
-      return moment.duration(total).humanize();
     },
     stringify(artists) {
       const keys = artists.length;

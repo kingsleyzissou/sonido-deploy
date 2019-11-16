@@ -18,4 +18,3 @@ Vue.use(LinkFactory);
 Vue.use(SideBar);
 Vue.use(Notify);
 
-
