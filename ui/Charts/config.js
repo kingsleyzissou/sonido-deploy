@@ -6,6 +6,7 @@ export const basicOptions = {
   },
   responsive: true,
 };
+
 export let blueChartOptions = {
   ...basicOptions,
   tooltips: {
@@ -44,6 +45,49 @@ export let blueChartOptions = {
       ticks: {
         padding: 20,
         fontColor: "#2380f7"
+      }
+    }]
+  }
+}
+
+export let loudnessChartOptions = {
+  ...basicOptions,
+  tooltips: {
+    backgroundColor: '#f5f5f5',
+    titleFontColor: '#333',
+    bodyFontColor: '#666',
+    bodySpacing: 4,
+    xPadding: 12,
+    mode: "nearest",
+    intersect: 0,
+    position: "nearest"
+  },
+  scales: {
+    yAxes: [{
+      barPercentage: 1.6,
+      gridLines: {
+        drawBorder: false,
+        color: 'rgba(29,140,248,0.0)',
+        zeroLineColor: "transparent",
+      },
+      ticks: {
+        suggestedMin: -60,
+        suggestedMax: 0,
+        padding: 20,
+        fontColor: "#9a9a9a"
+      }
+    }],
+
+    xAxes: [{
+      barPercentage: 1.6,
+      gridLines: {
+        drawBorder: false,
+        color: 'rgba(225,78,202,0.1)',
+        zeroLineColor: "transparent",
+      },
+      ticks: {
+        padding: 20,
+        fontColor: "#9a9a9a"
       }
     }]
   }
@@ -200,7 +244,7 @@ export let barChartOptions = {
       },
       ticks: {
         suggestedMin: 60,
-        suggestedMax: 120,
+        suggestedMax: 100,
         padding: 20,
         fontColor: "#9e9e9e"
       }
@@ -219,4 +263,27 @@ export let barChartOptions = {
     }]
   }
 
+}
+
+export let chartData = (config, data, labels) => {
+  return {
+    datasets: [
+      {
+        fill: true,
+        borderColor: config.colors.danger,
+        borderWidth: 2,
+        borderDash: [],
+        borderDashOffset: 0.0,
+        pointBackgroundColor: config.colors.danger,
+        pointBorderColor: "rgba(255,255,255,0)",
+        pointHoverBackgroundColor: config.colors.danger,
+        pointBorderWidth: 20,
+        pointHoverRadius: 4,
+        pointHoverBorderWidth: 15,
+        pointRadius: 4,
+        data
+      }
+    ],
+    labels
+  }
 }

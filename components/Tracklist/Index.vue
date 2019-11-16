@@ -27,35 +27,9 @@
                     >Explicit</span>
                   </td>
                   <td class="text-right">
-                    <dropdown
-                      menu-on-right
-                      title-tag="a"
-                      class="nav-item"
-                      menu-classes="dropdown-navbar"
-                    >
-                      <a slot="title" data-toggle="dropdown" aria-expanded="true">
-                        <button type="button" class="toggler">
-                          <span class="toggler-bar toggler-kebab"></span>
-                          <span class="toggler-bar toggler-kebab"></span>
-                          <span class="toggler-bar toggler-kebab"></span>
-                        </button>
-                      </a>
-                      <li class="nav-link">
-                        <!-- <a
-                          :href="`/artists/${song.track.artists[0].id}`"
-                          class="nav-item dropdown-item"
-                        >View artist</a>-->
-                      </li>
-                      <li class="nav-link">
-                        <!-- <a
-                          :href="`/albums/${song.track.album.id}`"
-                          class="nav-item dropdown-item"
-                        >View album</a>-->
-                      </li>
-                      <li class="nav-link">
-                        <!-- <a href="#" class="nav-item dropdown-item">Add to playlist</a> -->
-                      </li>
-                    </dropdown>
+                    <nuxt-link :to="`/tracks/${track.id}`">
+                      <i class="tim-icons icon-chart-bar-32 text-primary"></i>
+                    </nuxt-link>
                   </td>
                   <td class="text-right">{{track.duration_ms | duration}}</td>
                   <td>
