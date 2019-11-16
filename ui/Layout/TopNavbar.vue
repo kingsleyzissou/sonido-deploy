@@ -63,6 +63,7 @@
                 type="text"
                 class="form-control"
                 id="inlineFormInputGroup"
+                @keyup.enter="search"
                 placeholder="SEARCH"
               />
             </modal>
@@ -136,6 +137,10 @@ export default {
     };
   },
   methods: {
+    search() {
+      const url = `/search?q=${this.searchQuery}`;
+      this.$router.push(url);
+    },
     login() {
       this.$auth.loginWith("spotify");
     },

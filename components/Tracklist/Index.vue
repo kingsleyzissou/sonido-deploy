@@ -8,36 +8,25 @@
               <tr>
                 <th width="5%"></th>
                 <th>Title</th>
-                <th>Artist</th>
-                <th>Album</th>
-                <th></th>
-                <th>Duration</th>
-                <th width="8%">Pop.</th>
+                <th width="5%"></th>
+                <th width="8%" class="text-right">Duration</th>
+                <th width="5%">Popularity</th>
               </tr>
             </thead>
             <tbody>
-              <tr v-for="(song, index) in songs" :key="index">
-                <template v-if="song.track">
+              <tr v-for="(track, index) in songs" :key="index">
+                <template v-if="track">
                   <td>
                     <i class="tim-icons icon-triangle-right-17"></i>
                   </td>
                   <td>
-                    {{song.track.name}}&nbsp;
+                    {{track.name}}&nbsp;
                     <span
-                      v-if="song.track.explicit"
+                      v-if="track.explicit"
                       class="badge badge-outline badge-secondary"
                     >Explicit</span>
                   </td>
-                  <td>
-                    <span v-html="$options.filters.stringify(song.track.artists)"></span>
-                  </td>
-                  <td>
-                    <nuxt-link
-                      :to="`/albums/${song.track.album.id}`"
-                      class="text-primary"
-                    >{{song.track.album.name}}</nuxt-link>
-                  </td>
-                  <td>
+                  <td class="text-right">
                     <dropdown
                       menu-on-right
                       title-tag="a"
@@ -52,30 +41,30 @@
                         </button>
                       </a>
                       <li class="nav-link">
-                        <a
+                        <!-- <a
                           :href="`/artists/${song.track.artists[0].id}`"
                           class="nav-item dropdown-item"
-                        >View artist</a>
+                        >View artist</a>-->
                       </li>
                       <li class="nav-link">
-                        <a
+                        <!-- <a
                           :href="`/albums/${song.track.album.id}`"
                           class="nav-item dropdown-item"
-                        >View album</a>
+                        >View album</a>-->
                       </li>
                       <li class="nav-link">
-                        <a href="#" class="nav-item dropdown-item">Add to playlist</a>
+                        <!-- <a href="#" class="nav-item dropdown-item">Add to playlist</a> -->
                       </li>
                     </dropdown>
                   </td>
-                  <td class="text-right">{{song.track.duration_ms | duration}}</td>
+                  <td class="text-right">{{track.duration_ms | duration}}</td>
                   <td>
                     <div class="progress md-progress" style="height: 8px">
                       <div
                         class="progress-bar bg-success"
                         role="progressbar"
-                        :style="{width: `${song.track.popularity}%`, height: '8px'}"
-                        :aria-valuenow="song.track.popularity"
+                        :style="{width: `${track.popularity}%`, height: '8px'}"
+                        :aria-valuenow="track.popularity"
                         aria-valuemin="0"
                         aria-valuemax="100"
                       ></div>
@@ -95,23 +84,40 @@
 import moment from "moment";
 import { Table } from "~/ui";
 
-const createArtistLink = artist => {
-  return `<a href="/artists/${artist.id}">${artist.name}</a>`;
-};
-
 export default {
-  props: ["songs"],
+  props: ["tracks"],
   components: {
     Table
   },
+  data() {
+    return {
+      data: {
+        songs: []
+      }
+    };
+  },
+  async mounted() {
+    const { data } = await this.$axios.get(
+      "https://api.spotify.com/v1/tracks",
+      {
+        params: {
+          ids: this.trackIDs()
+        }
+      }
+    );
+    this.data.songs = data.tracks;
+  },
+  methods: {
+    trackIDs() {
+      return this.tracks.map(track => track.id).join(",");
+    }
+  },
+  computed: {
+    songs() {
+      return this.data.songs;
+    }
+  },
   filters: {
-    stringify(artists) {
-      const keys = artists.length;
-      if (keys === 1) return createArtistLink(artists[0]);
-      if (keys < 3) return artists.map(a => createArtistLink(a)).join(", ");
-      artists = artists.slice(0, 2);
-      return artists.map(a => createArtistLink(a)).join(", ") + "...";
-    },
     duration(time) {
       let duration = moment.duration(time);
       return moment.utc(duration.asMilliseconds()).format("mm:ss");
