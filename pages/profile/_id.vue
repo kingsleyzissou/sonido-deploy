@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import UserCard from "~/components/User/Card";
+import UserCard from "~/components/Cards/User";
 export default {
   layout: "dashboard",
   components: {

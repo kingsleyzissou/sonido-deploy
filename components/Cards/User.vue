@@ -44,7 +44,6 @@ export default {
       this.user.images.length > 0
         ? this.user.images[0].url
         : "http://localhost:3000/img/placeholder-square.png";
-    console.log(image);
     const [following, hex] = await Promise.all([
       this.$axios.get(`/me/following/contains?type=user&ids=${this.user.id}`)
     ]);

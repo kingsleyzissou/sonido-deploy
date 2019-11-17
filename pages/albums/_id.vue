@@ -6,7 +6,7 @@
 </template>
 
 <script>
-import AlbumCard from "~/components/Album/Card";
+import AlbumCard from "~/components/Cards/Album";
 import Tracklist from "~/components/Tracklist";
 
 export default {

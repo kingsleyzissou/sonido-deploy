@@ -43,7 +43,6 @@ export default {
     };
   },
   async mounted() {
-    console.log(this.artist);
     let image =
       this.artist.images.length > 0
         ? this.artist.images[0].url

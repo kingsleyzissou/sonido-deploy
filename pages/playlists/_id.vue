@@ -7,7 +7,7 @@
 
 <script>
 import Songlist from "~/components/Songlist";
-import PlaylistCard from "~/components/Playlist/Card";
+import PlaylistCard from "~/components/Cards/Playlist";
 export default {
   layout: "dashboard",
   components: {
