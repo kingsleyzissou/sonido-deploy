@@ -8,8 +8,6 @@
               <tr>
                 <th width="5%"></th>
                 <th>Title</th>
-                <th>Artist</th>
-                <th>Album</th>
                 <th width="5%"></th>
                 <th width="8%" class="text-right">Duration</th>
                 <th width="5%">Popularity</th>
@@ -19,7 +17,12 @@
               <tr v-for="(track, index) in songs" :key="index">
                 <template v-if="track">
                   <td>
-                    <i class="tim-icons icon-triangle-right-17"></i>
+                    <template v-if="nowPlaying(track.id)">
+                      <i class="tim-icons icon-triangle-right-17"></i>
+                    </template>
+                    <template v-else>
+                      <i class="tim-icons icon-button-pause"></i>
+                    </template>
                   </td>
                   <td>
                     {{track.name}}&nbsp;
@@ -27,15 +30,6 @@
                       v-if="track.explicit"
                       class="badge badge-outline badge-secondary"
                     >Explicit</span>
-                  </td>
-                  <td>
-                    <span v-html="$options.filters.stringify(track.artists)"></span>
-                  </td>
-                  <td>
-                    <nuxt-link
-                      :to="`/albums/${track.album.id}`"
-                      class="text-primary"
-                    >{{track.album.name}}</nuxt-link>
                   </td>
                   <td class="text-right">
                     <nuxt-link :to="`/tracks/${track.id}`">
@@ -69,10 +63,6 @@
 import moment from "moment";
 import { Table } from "~/ui";
 
-const createArtistLink = artist => {
-  return `<a href="/artists/${artist.id}">${artist.name}</a>`;
-};
-
 export default {
   props: ["tracks"],
   components: {
@@ -99,6 +89,9 @@ export default {
   methods: {
     trackIDs() {
       return this.tracks.map(track => track.id).join(",");
+    },
+    nowPlaying(id) {
+      return this.$store.nowPlaying == id;
     }
   },
   computed: {
@@ -107,13 +100,6 @@ export default {
     }
   },
   filters: {
-    stringify(artists) {
-      const keys = artists.length;
-      if (keys === 1) return createArtistLink(artists[0]);
-      if (keys < 3) return artists.map(a => createArtistLink(a)).join(", ");
-      artists = artists.slice(0, 2);
-      return artists.map(a => createArtistLink(a)).join(", ") + "...";
-    },
     duration(time) {
       let duration = moment.duration(time);
       return moment.utc(duration.asMilliseconds()).format("mm:ss");

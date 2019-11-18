@@ -91,7 +91,7 @@
     <div class="row">
       <div class="col-12">
         <card>
-          <tracklist :tracks="tracks.items"></tracklist>
+          <tracklist :tracks="tracks.items" :full="true"></tracklist>
         </card>
       </div>
     </div>
@@ -99,7 +99,7 @@
 </template>
 
 <script>
-import Tracklist from "~/components/Tracklist/WithArtist";
+import Tracklist from "~/components/Tracklist";
 export default {
   layout: "dashboard",
   components: { Tracklist },

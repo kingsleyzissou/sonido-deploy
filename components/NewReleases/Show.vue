@@ -1,7 +1,9 @@
 <template>
   <fragment>
     <template v-if="album && !loading">
-      <h3 class="mb-0">New Releases</h3>
+      <card type="plain" class="mb-0">
+        <h3 class="mb-0">New Releases</h3>
+      </card>
       <card type="plain" class="mb-0" v-if="album.images.length > 0">
         <nuxt-link class="text-white" :to="`/albums/${album.id}`">
           <div v-if="album.images.length > 0" style="width: 150px">
@@ -38,7 +40,8 @@ export default {
     const { data } = await this.$axios.get(`/artists/${this.artist}/albums`);
     let now = new moment();
     let newAlbums = data.items.filter(album => {
-      return moment.duration(now.diff(album.release_date)).years() < 1;
+      let release = moment(album.release_date, "YYYY-MM-DD");
+      return moment.duration(now.diff(release)).years() < 1;
     });
     let latest = newAlbums.reduce((newest, album) => {
       let c = moment.duration(now.diff(album.release_date));

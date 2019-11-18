@@ -33,6 +33,7 @@ module.exports = {
     '~/plugins/fragment',
     '~/plugins/dashboard',
     '~/plugins/spinners',
+    '~/plugins/transport'
   ],
   /*
   ** Nuxt.js dev-modules

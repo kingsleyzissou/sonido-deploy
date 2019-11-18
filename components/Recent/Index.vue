@@ -8,13 +8,13 @@
           </card>
         </div>
       </div>
-      <tracklist :tracks="recents"></tracklist>
+      <tracklist :tracks="recents" :full="true"></tracklist>
     </template>
   </fragment>
 </template>
 
 <script>
-import Tracklist from "../Tracklist/WithArtist";
+import Tracklist from "../Tracklist";
 export default {
   components: { Tracklist },
   data() {

@@ -9,7 +9,6 @@
           v-for="(artist, index) in artists"
           :key="index"
         >
-          <!-- <tr> -->
           <td>
             <div v-if="artist.images.length > 0">
               <img
@@ -24,7 +23,6 @@
           <td style="vertical-align: center">
             <h6 class="mb-0">{{artist.name}}</h6>
           </td>
-          <!-- </tr> -->
         </nuxt-link>
       </tbody>
     </table>

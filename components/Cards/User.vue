@@ -4,7 +4,7 @@
       <card>
         <div class="d-flex align-items-end">
           <div class="mr-4" style="width: 250px; height: 100%">
-            <img :src="user.images[0].url" alt="Profile picture" style="width:100%" />
+            <img :src="image" alt="Profile picture" style="width:100%" />
           </div>
           <div class="mr-2">
             <h6 class="mb-0">User</h6>
@@ -34,16 +34,11 @@ export default {
       loading: true,
       data: {
         following: false,
-        hex: "",
-        image: ""
+        hex: ""
       }
     };
   },
   async mounted() {
-    let image =
-      this.user.images.length > 0
-        ? this.user.images[0].url
-        : "http://localhost:3000/img/placeholder-square.png";
     const [following, hex] = await Promise.all([
       this.$axios.get(`/me/following/contains?type=user&ids=${this.user.id}`)
     ]);
@@ -78,15 +73,20 @@ export default {
     }
   },
   computed: {
+    image() {
+      return this.user.images.length > 0
+        ? this.user.images[0].url
+        : "/img/placeholder-square.png";
+    },
     following() {
       return this.data.following;
     },
     hex() {
       return this.data.hex;
-    },
-    image() {
-      return this.data.image;
     }
+    // image() {
+    //   return this.data.image;
+    // }
   },
   filters: {
     humanReadable(number) {

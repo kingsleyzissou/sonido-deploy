@@ -90,7 +90,7 @@
                 aria-expanded="true"
               >
                 <div class="photo">
-                  <img :src="$auth.$state.user.images[0].url" />
+                  <img :src="image" />
                 </div>
                 <b class="caret d-none d-lg-block d-xl-block"></b>
                 <p class="d-lg-none">Log out</p>
@@ -125,6 +125,11 @@ export default {
     routeName() {
       const { name } = this.$route;
       return this.capitalizeFirstLetter(name);
+    },
+    image() {
+      return this.$auth.$state.user.images.length > 0
+        ? this.$auth.$state.user.images[0].url
+        : "/img/placeholder-square.png";
     }
   },
   data() {

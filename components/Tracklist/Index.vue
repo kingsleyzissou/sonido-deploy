@@ -8,6 +8,8 @@
               <tr>
                 <th width="5%"></th>
                 <th>Title</th>
+                <th v-if="full">Artist</th>
+                <th v-if="full">Album</th>
                 <th width="5%"></th>
                 <th width="8%" class="text-right">Duration</th>
                 <th width="5%">Popularity</th>
@@ -17,7 +19,19 @@
               <tr v-for="(track, index) in songs" :key="index">
                 <template v-if="track">
                   <td>
-                    <i class="tim-icons icon-triangle-right-17"></i>
+                    <template v-if="nowPlaying(track.id)">
+                      <button v-if="$store.state.isPlaying" @click="pause" class="btn btn-link">
+                        <i class="tim-icons icon-button-pause"></i>
+                      </button>
+                      <button v-else @click="unpause" class="btn btn-link">
+                        <i class="tim-icons icon-triangle-right-17"></i>
+                      </button>
+                    </template>
+                    <template v-else>
+                      <button @click="play(track)" class="btn btn-link">
+                        <i class="tim-icons icon-triangle-right-17"></i>
+                      </button>
+                    </template>
                   </td>
                   <td>
                     {{track.name}}&nbsp;
@@ -25,6 +39,15 @@
                       v-if="track.explicit"
                       class="badge badge-outline badge-secondary"
                     >Explicit</span>
+                  </td>
+                  <td v-if="full">
+                    <span v-html="$options.filters.stringify(track.artists)"></span>
+                  </td>
+                  <td v-if="full">
+                    <nuxt-link
+                      :to="`/albums/${track.album.id}`"
+                      class="text-primary"
+                    >{{track.album.name}}</nuxt-link>
                   </td>
                   <td class="text-right">
                     <nuxt-link :to="`/tracks/${track.id}`">
@@ -58,8 +81,18 @@
 import moment from "moment";
 import { Table } from "~/ui";
 
+const createArtistLink = artist => {
+  return `<a href="/artists/${artist.id}">${artist.name}</a>`;
+};
+
 export default {
-  props: ["tracks"],
+  props: {
+    tracks: Array,
+    full: {
+      type: Boolean,
+      default: false
+    }
+  },
   components: {
     Table
   },
@@ -71,19 +104,30 @@ export default {
     };
   },
   async mounted() {
-    const { data } = await this.$axios.get(
-      "https://api.spotify.com/v1/tracks",
-      {
-        params: {
-          ids: this.trackIDs()
-        }
+    const { data } = await this.$axios.get("tracks", {
+      params: {
+        ids: this.trackIDs()
       }
-    );
+    });
+    console.log(this.$store.state.nowPlaying);
     this.data.songs = data.tracks;
   },
   methods: {
+    play(track) {
+      if (this.nowPlaying(track.id)) return this.$unpause(this.$store);
+      this.$play(track, this.$store, this.$axios);
+    },
+    pause() {
+      this.$pause(this.$store, this.$axios);
+    },
+    unpause() {
+      this.$pause(this.$store, this.$axios);
+    },
     trackIDs() {
       return this.tracks.map(track => track.id).join(",");
+    },
+    nowPlaying(id) {
+      return this.$store.state.nowPlaying.id == id;
     }
   },
   computed: {
@@ -92,6 +136,13 @@ export default {
     }
   },
   filters: {
+    stringify(artists) {
+      const keys = artists.length;
+      if (keys === 1) return createArtistLink(artists[0]);
+      if (keys < 3) return artists.map(a => createArtistLink(a)).join(", ");
+      artists = artists.slice(0, 2);
+      return artists.map(a => createArtistLink(a)).join(", ") + "...";
+    },
     duration(time) {
       let duration = moment.duration(time);
       return moment.utc(duration.asMilliseconds()).format("mm:ss");

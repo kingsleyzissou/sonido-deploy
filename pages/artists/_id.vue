@@ -3,19 +3,23 @@
     <artist-card :artist="artist"></artist-card>
     <div class="row d-flex flex-row">
       <div class="col-8">
-        <card style="height: 100%">
+        <card style="height: 100%" class="mb-0">
           <new-releases :artist="$route.params.id" />
-          <h3 class="mb-0">Top Tracks</h3>
+          <card type="plain" class="mb-0">
+            <h3 class="mb-0">Top Tracks</h3>
+          </card>
           <tracklist :tracks="toptracks" />
         </card>
       </div>
       <div class="col-4">
-        <card style="height: 100%">
+        <card style="height: 100%" class="mb-0">
           <h3 class="mb-1">Similar artists</h3>
           <similar :artists="similar.slice(0,7)" />
         </card>
       </div>
     </div>
+    <hr />
+    <albums :artist="$route.params.id" type="album" />
   </fragment>
 </template>
 
@@ -25,6 +29,7 @@ import ArtistCard from "~/components/Cards/Artist";
 import NewReleases from "~/components/NewReleases/Show";
 import Tracklist from "~/components/Tracklist";
 import Similar from "~/components/Artist/Similar";
+import Albums from "~/components/Artist/Albums";
 
 export default {
   layout: "dashboard",
@@ -32,7 +37,8 @@ export default {
     ArtistCard,
     NewReleases,
     Tracklist,
-    Similar
+    Similar,
+    Albums
   },
   async asyncData({ $axios, params }) {
     const [artist, similar, toptracks] = await Promise.all([
