@@ -84,7 +84,8 @@ module.exports = {
   ** Add route protection
   */
   router: {
-    middleware: ['auth']
+    middleware: ['auth'],
+    base: '/sonido/'
   },
   /*
   ** Add authentication config
