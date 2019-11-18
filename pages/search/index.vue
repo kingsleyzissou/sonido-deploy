@@ -1,6 +1,5 @@
 <template>
   <fragment>
-    <canvas id="canvas"></canvas>
     <div class="row">
       <div class="col-12">
         <card type="plain" class="mb-0">

@@ -3,6 +3,7 @@ import Vue from 'vue'
 Vue.prototype.$play = async (context, store, axios) => {
   let payload = (context.type === "track") ? { uris: [context.uri] } : { context_uri: context.uri };
   await axios.put('/me/player/play', payload)
+  setTimeout(100)
   const { data } = await axios.get('me/player')
   const { is_playing, progress_ms, item } = data
   if (is_playing) {

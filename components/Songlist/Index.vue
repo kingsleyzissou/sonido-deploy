@@ -59,7 +59,11 @@
                         >View album</a>
                       </li>
                       <li class="nav-link">
-                        <a href="#" class="nav-item dropdown-item">Add to playlist</a>
+                        <a
+                          href="#"
+                          class="nav-item dropdown-item"
+                          @click.prevent="addToPlaylist(song.track)"
+                        >Add to playlist</a>
                       </li>
                     </dropdown>
                   </td>
@@ -98,6 +102,11 @@ export default {
   props: ["songs"],
   components: {
     Table
+  },
+  methods: {
+    addToPlaylist(track) {
+      this.$bus.$emit("add-to-playlist", track);
+    }
   },
   filters: {
     stringify(artists) {

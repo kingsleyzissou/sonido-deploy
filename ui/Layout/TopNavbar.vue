@@ -36,6 +36,48 @@
       <collapse-transition>
         <div class="collapse navbar-collapse show" v-show="showMenu">
           <ul class="navbar-nav ml-auto">
+            <dropdown tag="li" menu-on-right title-tag="a" class="nav-item">
+              <a
+                slot="title"
+                href="#"
+                class="dropdown-toggle nav-link"
+                data-toggle="dropdown"
+                aria-expanded="true"
+              >
+                <div class="notification d-none d-lg-block d-xl-block"></div>
+                <i class="tim-icons icon-sound-wave"></i>
+                <p class="d-lg-none">New Notifications</p>
+              </a>
+              <li class="nav-link">
+                <a
+                  href="#"
+                  data-toggle="modal"
+                  data-target="#createModal"
+                  @click="createModalVisible = true"
+                  class="nav-item dropdown-item"
+                >Create playlist</a>
+              </li>
+            </dropdown>
+            <modal
+              :show.sync="createModalVisible"
+              modal-classes="modal-sm"
+              id="createModal"
+              :centered="false"
+              :show-close="true"
+            >
+              <template>
+                <form role="form" @submit.prevent="createPlaylist">
+                  <h3 class="text-dark">Create a playlist</h3>
+                  <div class="form-group">
+                    <label for="usr">Playlist name</label>
+                    <input type="text" v-model="newPlaylist" class="form-control" id="usr" />
+                  </div>
+                  <div>
+                    <base-button type="primary" @click.prevent="createPlaylist" class="my-4">Create</base-button>
+                  </div>
+                </form>
+              </template>
+            </modal>
             <div class="search-bar input-group" @click="searchModalVisible = true">
               <!-- <input type="text" class="form-control" placeholder="Search...">
               <div class="input-group-addon"><i class="tim-icons icon-zoom-split"></i></div>-->
@@ -96,11 +138,11 @@
                 <p class="d-lg-none">Log out</p>
               </a>
               <li class="nav-link">
-                <a href="#" class="nav-item dropdown-item">Profile</a>
+                <a href="/profile" class="nav-item dropdown-item">Profile</a>
               </li>
-              <li class="nav-link">
+              <!-- <li class="nav-link">
                 <a href="#" class="nav-item dropdown-item">Settings</a>
-              </li>
+              </li>-->
               <div class="dropdown-divider"></div>
               <li class="nav-link">
                 <a href="#" @click.prevent="logout" class="nav-item dropdown-item">Log out</a>
@@ -121,6 +163,9 @@ export default {
     CollapseTransition,
     Modal
   },
+  mounted() {
+    this.$store.dispatch("playlists/getPlaylists");
+  },
   computed: {
     routeName() {
       const { name } = this.$route;
@@ -130,6 +175,9 @@ export default {
       return this.$auth.$state.user.images.length > 0
         ? this.$auth.$state.user.images[0].url
         : "/img/placeholder-square.png";
+    },
+    playlists() {
+      return this.$store.state.playlists.playlists;
     }
   },
   data() {
@@ -137,11 +185,28 @@ export default {
       activeNotifications: false,
       showMenu: false,
       searchModalVisible: false,
+      createModalVisible: false,
       loginModalVisible: false,
-      searchQuery: ""
+      searchQuery: "",
+      newPlaylist: ""
     };
   },
   methods: {
+    createPlaylist() {
+      this.$axios.post(`/users/${this.$auth.$state.user.id}/playlists`, {
+        name: this.newPlaylist,
+        public: true,
+        collaborative: false
+      });
+      this.createModalVisible = false;
+      this.$store.dispatch("playlists/getPlaylists");
+      this.$notify({
+        type: "primary",
+        message: "Success: playlist created successfully",
+        verticalAlign: "top",
+        horizontalAlign: "right"
+      });
+    },
     search() {
       const url = `/search?q=${this.searchQuery}`;
       this.$router.push(url);
@@ -173,5 +238,12 @@ export default {
   }
 };
 </script>
-<style>
+<style scoped>
+.form-control {
+  color: #2b3553;
+}
+.form-control:focus,
+.form-control:hover {
+  color: #2b3553;
+}
 </style>

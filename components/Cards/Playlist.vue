@@ -19,7 +19,11 @@
                 <ul class="list-inline mb-2">
                   <li class="list-inline-item">{{ playlist.tracks.items.length | pluralise }}</li>
                 </ul>
-                <button class="btn btn-primary">Play</button>
+                <div class="mt-2 mb-2">
+                  <base-button round type="primary" @click="follow" v-if="!following">Follow</base-button>
+                  <base-button round simple type="primary" @click="unfollow" v-else>Unfollow</base-button>
+                  <base-button round simple type="success" @click="play">Play</base-button>
+                </div>
               </div>
             </div>
           </div>
@@ -38,6 +42,59 @@ const createArtistLink = artist => {
 
 export default {
   props: ["playlist"],
+  data() {
+    return {
+      data: {
+        following: false
+      }
+    };
+  },
+  async mounted() {
+    const { data } = await this.$axios.get(
+      `/playlists/${this.playlist.id}/followers/contains`,
+      {
+        params: {
+          ids: this.$auth.$state.user.id
+        }
+      }
+    );
+    this.loading = false;
+    this.data = { following: data[0] };
+  },
+  methods: {
+    play() {
+      this.$play(this.playlist, this.$store, this.$axios);
+    },
+    async follow() {
+      await this.$axios.put(`/playlists/${this.playlist.id}/followers`);
+      this.data.following = true;
+      this.notify(
+        "primary",
+        `Success! You are now following ${this.playlist.name}`
+      );
+    },
+    async unfollow() {
+      await this.$axios.delete(`/playlists/${this.playlist.id}/followers`);
+      this.data.following = false;
+      this.notify(
+        "danger",
+        `Success! You have unfollowed ${this.playlist.name}`
+      );
+    },
+    notify(type, message) {
+      this.$notify({
+        type,
+        message,
+        verticalAlign: "top",
+        horizontalAlign: "right"
+      });
+    }
+  },
+  computed: {
+    following() {
+      return this.data.following;
+    }
+  },
   filters: {
     pluralise(total) {
       if (total == 1) return "1 song";

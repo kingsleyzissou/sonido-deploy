@@ -37,10 +37,13 @@ async function start() {
   }
 
   app.get('/api/image', async (req, res) => {
-    const { image } = req.query
-    const colors = await colorthief.getColor(image)
-      .catch(err => { throw new Error(err.message) })
-    res.send(toHex(colors))
+    try {
+      const { image } = req.query
+      const colors = await colorthief.getColor(image);
+      res.send(toHex(colors))
+    } catch (err) {
+      res.send('#1e1e2f')
+    }
   })
 
   // Give nuxt middleware to express

@@ -11,6 +11,7 @@
                 <th v-if="full">Artist</th>
                 <th v-if="full">Album</th>
                 <th width="5%"></th>
+                <th width="5%"></th>
                 <th width="8%" class="text-right">Duration</th>
                 <th width="5%">Popularity</th>
               </tr>
@@ -52,6 +53,11 @@
                       :to="`/albums/${track.album.id}`"
                       class="text-primary"
                     >{{track.album.name}}</nuxt-link>
+                  </td>
+                  <td>
+                    <a href="#" @click.prevent="addToPlaylist(track)">
+                      <i class="tim-icons icon-simple-add text-primary"></i>
+                    </a>
                   </td>
                   <td class="text-right">
                     <nuxt-link :to="`/tracks/${track.id}`">
@@ -121,13 +127,16 @@ export default {
       this.$pause(this.$store, this.$axios);
     },
     unpause() {
-      this.$pause(this.$store, this.$axios);
+      this.$unpause(this.$store, this.$axios);
     },
     trackIDs() {
       return this.tracks.map(track => track.id).join(",");
     },
     nowPlaying(id) {
       return this.$store.state.transport.nowPlaying.id == id;
+    },
+    addToPlaylist(track) {
+      this.$bus.$emit("add-to-playlist", track);
     }
   },
   computed: {

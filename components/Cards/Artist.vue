@@ -19,7 +19,8 @@
           >{{artist.followers.total | humanReadable}} followers</h6>
           <div class="mt-2 mb-2">
             <base-button round type="primary" @click="follow" v-if="!following">Follow</base-button>
-            <base-button round simple type="success" @click="unfollow" v-else>Unfollow</base-button>
+            <base-button round simple type="primary" @click="unfollow" v-else>Unfollow</base-button>
+            <base-button round simple type="success" @click="play">Play</base-button>
           </div>
         </div>
       </div>
@@ -61,6 +62,9 @@ export default {
     this.data = { following: following.data[0], hex: hex.data, image };
   },
   methods: {
+    play() {
+      this.$play(this.artist, this.$store, this.$axios);
+    },
     async follow() {
       await this.$axios.put("/me/following?type=artist", {
         ids: [this.artist.id]

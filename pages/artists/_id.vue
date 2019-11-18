@@ -1,6 +1,7 @@
 <template>
   <fragment>
     <artist-card :artist="artist"></artist-card>
+    <bio :artist="artist" v-on:mbid="change" />
     <div class="row d-flex flex-row">
       <div class="col-8">
         <card style="height: 100%" class="mb-0">
@@ -30,6 +31,7 @@ import NewReleases from "~/components/NewReleases/Show";
 import Tracklist from "~/components/Tracklist";
 import Similar from "~/components/Artist/Similar";
 import Albums from "~/components/Artist/Albums";
+import Bio from "~/components/Artist/Bio";
 
 export default {
   layout: "dashboard",
@@ -38,7 +40,13 @@ export default {
     NewReleases,
     Tracklist,
     Similar,
-    Albums
+    Albums,
+    Bio
+  },
+  data() {
+    return {
+      mbid: ""
+    };
   },
   async asyncData({ $axios, params }) {
     const [artist, similar, toptracks] = await Promise.all([
@@ -53,6 +61,11 @@ export default {
       similar: similar.data.artists,
       toptracks: toptracks.data.tracks
     };
+  },
+  methods: {
+    change(event) {
+      this.mbid = event;
+    }
   },
   filters: {
     stripLink(summary) {

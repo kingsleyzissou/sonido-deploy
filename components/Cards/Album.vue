@@ -18,7 +18,7 @@
                   <li class="list-inline-item">{{ album.total_tracks | pluralise }}&nbsp;&nbsp;|</li>
                   <li class="list-inline-item">{{ album.tracks.items | getDuration }}</li>
                 </ul>
-                <button class="btn btn-primary">Stuff</button>
+                <base-button @click="play" type="simple" round>Play</base-button>
               </div>
             </div>
           </div>
@@ -37,6 +37,11 @@ const createArtistLink = artist => {
 
 export default {
   props: ["album"],
+  methods: {
+    play() {
+      this.$play(this.album, this.$store, this.$axios);
+    }
+  },
   filters: {
     pluralise(total) {
       if (total == 1) return "1 song";
