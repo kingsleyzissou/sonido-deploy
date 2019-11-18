@@ -6,11 +6,14 @@
           <img :src="image" alt="Album cover" />
         </div>
         <div class="mr-2">
-          <h5 class="mb-0" v-html="$options.filters.stringify($store.state.nowPlaying.artists)"></h5>
+          <h5
+            class="mb-0"
+            v-html="$options.filters.stringify($store.state.transport.nowPlaying.artists)"
+          ></h5>
           <h6
             class="album-title"
-            v-if="$store.state.nowPlaying.name"
-          >{{$store.state.nowPlaying.name}}</h6>
+            v-if="$store.state.transport.nowPlaying.name"
+          >{{$store.state.transport.nowPlaying.name}}</h6>
         </div>
       </div>
       <div class="text-center flex-grow-1">
@@ -23,7 +26,11 @@
               <i class="tim-icons icon-minimal-left text-white"></i>
             </button>
             <template v-if="progress == 0">
-              <button v-if="!isPlaying" @click="play($store.state.nowPlaying)" class="btn btn-link">
+              <button
+                v-if="!isPlaying"
+                @click="play($store.state.transport.nowPlaying)"
+                class="btn btn-link"
+              >
                 <i class="tim-icons tim-icons-24 icon-triangle-right-17 text-white"></i>
               </button>
               <button v-else @click="pause" class="btn btn-link">
@@ -91,26 +98,26 @@ export default {
   },
   mounted() {
     this.init();
-    if (this.playing) this.counter();
   },
   methods: {
     init() {
-      this.$store.dispatch("poll");
-      this.track = this.$store.state.nowPlaying;
-      this.playing = this.$store.state.isPlaying;
-      this.meta.progress = this.$store.state.progress;
+      this.$store.dispatch("transport/poll");
+      this.track = this.$store.state.transport.nowPlaying;
+      this.playing = this.$store.state.transport.isPlaying;
+      this.meta.progress = this.$store.state.transport.progress;
       this.duration = moment.duration(this.track.duration_ms);
       this.meta.progress_ms =
         (this.track.duration_ms * this.meta.progress) / 100;
       this.meta.playhead = !this.meta.progress_ms
         ? moment.utc().set({ hour: 0, minute: 0, second: 0, millisecond: 0 })
         : moment(this.meta.progress_ms);
+      if (this.playing) this.counter();
       this.loading = false;
     },
     update() {
-      this.$store.dispatch("poll");
-      this.init();
-      this.counter();
+      setTimeout(() => {
+        this.init();
+      }, 500);
     },
     counter() {
       this.interval = setInterval(() => {
@@ -138,6 +145,7 @@ export default {
   computed: {
     progress() {
       if (this.meta.progress < 100) return this.meta.progress;
+      this.stopCounter();
       this.update();
     },
     playhead() {
@@ -145,17 +153,17 @@ export default {
     },
     image() {
       if (!this.loading) {
-        let album = this.$store.state.nowPlaying.album;
+        let album = this.$store.state.transport.nowPlaying.album;
         return album && album.images.length > 0
           ? album.images[0].url
           : "/img/placeholder-square.png";
       }
     },
     currentTrack() {
-      return this.$store.state.nowPlaying;
+      return this.$store.state.transport.nowPlaying;
     },
     isPlaying() {
-      return this.$store.state.isPlaying;
+      return this.$store.state.transport.isPlaying;
     }
   },
   filters: {

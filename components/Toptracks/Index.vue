@@ -1,6 +1,11 @@
 <template>
   <fragment>
     <div class="row">
+      <div class="col-12">
+        <h2>{{title}}</h2>
+      </div>
+    </div>
+    <div class="row">
       <div class="col-lg-3" v-for="(album,index) in albums" :key="index">
         <template v-if="album">
           <a :href="`/albums/${album.id}`" class="card bg-dark text-white text-center">
@@ -18,7 +23,7 @@
 <script>
 export default {
   data() {
-    return { data: { albums: [] } };
+    return { title: "Top Tracks", data: { tracks: [] } };
   },
   async mounted() {
     let { albums } = await this.$axios.$get("/browse/new-releases");

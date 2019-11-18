@@ -20,7 +20,11 @@
                 <template v-if="track">
                   <td>
                     <template v-if="nowPlaying(track.id)">
-                      <button v-if="$store.state.isPlaying" @click="pause" class="btn btn-link">
+                      <button
+                        v-if="$store.state.transport.isPlaying"
+                        @click="pause"
+                        class="btn btn-link"
+                      >
                         <i class="tim-icons icon-button-pause"></i>
                       </button>
                       <button v-else @click="unpause" class="btn btn-link">
@@ -80,10 +84,7 @@
 <script>
 import moment from "moment";
 import { Table } from "~/ui";
-
-const createArtistLink = artist => {
-  return `<a href="/artists/${artist.id}">${artist.name}</a>`;
-};
+import createArtistLink from "~/assets/js/createArtistLink";
 
 export default {
   props: {
@@ -109,7 +110,6 @@ export default {
         ids: this.trackIDs()
       }
     });
-    console.log(this.$store.state.nowPlaying);
     this.data.songs = data.tracks;
   },
   methods: {
@@ -127,7 +127,7 @@ export default {
       return this.tracks.map(track => track.id).join(",");
     },
     nowPlaying(id) {
-      return this.$store.state.nowPlaying.id == id;
+      return this.$store.state.transport.nowPlaying.id == id;
     }
   },
   computed: {

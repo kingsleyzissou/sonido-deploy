@@ -4,9 +4,9 @@
       <side-bar backgroundColor="green">
         <template slot="links">
           <sidebar-link to="/dashboard" name="home" icon="nc-icon nc-home-52" />
-          <sidebar-link to="/browse" name="browse" icon="nc-icon nc-layers-3" />
+          <sidebar-link to="/profile" name="profile" icon="tim-icons icon-single-02" />
           <sidebar-link to="/recent" name="recent" icon="tim-icons icon-refresh-02" />
-          <sidebar-link to="/recent" name="playlists" icon="tim-icons icon-single-copy-04" />
+          <sidebar-link to="/playlists" name="playlists" icon="nc-icon nc-layers-3" />
         </template>
       </side-bar>
       <div class="main-panel" data="green">

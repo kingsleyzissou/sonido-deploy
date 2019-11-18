@@ -10,7 +10,6 @@ import UserCard from "~/components/Cards/User";
 import RecentlyPlayed from "~/components/Recent";
 
 export default {
-  layout: "dashboard",
   components: {
     UserCard,
     RecentlyPlayed

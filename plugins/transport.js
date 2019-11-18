@@ -6,9 +6,9 @@ Vue.prototype.$play = async (context, store, axios) => {
   const { data } = await axios.get('me/player')
   const { is_playing, progress_ms, item } = data
   if (is_playing) {
-    store.dispatch('updateIsPlaying', true)
-    store.dispatch('updateNowPlaying', item)
-    store.dispatch('updateProgress', { progress: progress_ms, duration: item.duration_ms })
+    store.dispatch('transport/updateIsPlaying', true)
+    store.dispatch('transport/updateNowPlaying', item)
+    store.dispatch('transport/updateProgress', { progress: progress_ms, duration: item.duration_ms })
   }
 }
 
@@ -17,8 +17,8 @@ Vue.prototype.$pause = async (store, axios) => {
   const { data } = await axios.get('me/player')
   let { is_playing, progress_ms } = data
   if (!is_playing) {
-    store.dispatch('updateIsPlaying', false)
-    store.dispatch('updateProgress', { progress: progress_ms, duration: store.state.nowPlaying.duration_ms })
+    store.dispatch('transport/updateIsPlaying', false)
+    store.dispatch('transport/updateProgress', { progress: progress_ms, duration: store.state.transport.nowPlaying.duration_ms })
   }
 
 }
@@ -28,7 +28,7 @@ Vue.prototype.$unpause = async (store, axios) => {
   const { data } = await axios.get('me/player')
   let { is_playing, progress_ms } = data
   if (is_playing) {
-    store.dispatch('updateIsPlaying', true)
-    store.dispatch('updateProgress', { progress: progress_ms, duration: store.state.nowPlaying.duration })
+    store.dispatch('transport/updateIsPlaying', true)
+    store.dispatch('transport/updateProgress', { progress: progress_ms, duration: store.state.transport.nowPlaying.duration })
   }
 }

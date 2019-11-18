@@ -26,9 +26,7 @@ export default {
     };
   },
   async mounted() {
-    const { items } = await this.$axios.$get(
-      "https://api.spotify.com/v1/me/player/recently-played"
-    );
+    const { items } = await this.$axios.$get("me/player/recently-played");
     let recents = items.map(item => item.track);
     this.data.recents = recents;
     this.loading = false;

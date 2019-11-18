@@ -5,7 +5,7 @@
 <script>
 import UserCard from "~/components/Cards/User";
 export default {
-  layout: "dashboard",
+  // layout: "dashboard",
   components: {
     UserCard
   },
