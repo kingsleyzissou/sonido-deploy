@@ -52,7 +52,7 @@ export default {
       this.$axios.get(
         `/me/following/contains?type=artist&ids=${this.artist.id}`
       ),
-      this.$axios.get("http://localhost:3000/api/image", {
+      this.$axios.get(`${process.env.SERVER}/api/image`, {
         params: {
           image: image
         }
