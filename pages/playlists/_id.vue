@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import Songlist from "~/components/Songlist";
-import PlaylistCard from "~/components/Cards/Playlist";
+import Songlist from "~/components/Songlist/Index.vue";
+import PlaylistCard from "~/components/Cards/Playlist.vue";
 export default {
   layout: "dashboard",
   components: {

@@ -6,8 +6,8 @@
 </template>
 
 <script>
-import AlbumCard from "~/components/Cards/Album";
-import Tracklist from "~/components/Tracklist";
+import AlbumCard from "~/components/Cards/Album.vue";
+import Tracklist from "~/components/Tracklist/Index.vue";
 
 export default {
   layout: "dashboard",

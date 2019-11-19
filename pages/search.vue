@@ -98,7 +98,7 @@
 </template>
 
 <script>
-import Tracklist from "~/components/Tracklist";
+import Tracklist from "~/components/Tracklist/Index.vue";
 export default {
   layout: "dashboard",
   components: { Tracklist },

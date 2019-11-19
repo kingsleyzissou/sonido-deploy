@@ -7,7 +7,7 @@
 </template>
 
 <script>
-import Tracklist from "~/components/Tracklist";
+import Tracklist from "./Index.vue";
 
 export default {
   props: ["album"],

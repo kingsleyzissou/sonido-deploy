@@ -10,10 +10,10 @@
 </template>
 
 <script>
-import UserCard from "~/components/Cards/User";
-import RecentlyPlayed from "~/components/Recent";
+import UserCard from "~/components/Cards/User.vue";
+import RecentlyPlayed from "~/components/Recent/Index.vue";
 // import TopTracks from "~/components/TopTracks";
-import Tracklist from "~/components/Tracklist";
+import Tracklist from "~/components/Tracklist/Index.vue";
 
 export default {
   components: {

@@ -14,7 +14,7 @@
 </template>
 
 <script>
-import Tracklist from "../Tracklist";
+import Tracklist from "../Tracklist/Index.vue";
 export default {
   components: { Tracklist },
   data() {

@@ -15,7 +15,7 @@
 </template>
 
 <script>
-import TopNavbar from "~/ui/Layout/TopNavbar.vue";
+import TopNavbar from "../ui/Layout/TopNavbar.vue";
 export default {
   auth: false,
   components: {

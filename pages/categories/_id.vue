@@ -18,7 +18,7 @@
 </template>
 
 <script>
-import Category from "~/components/Category";
+import Category from "~/components/Category/Index.vue";
 export default {
   layout: "dashboard",
   components: {

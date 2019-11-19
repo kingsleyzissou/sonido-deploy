@@ -64,8 +64,8 @@ import Modal from "~/ui/Modal.vue";
 import TopNavbar from "~/ui/Layout/TopNavbar.vue";
 import ContentFooter from "~/ui/Layout/ContentFooter.vue";
 import DashboardContent from "~/ui/Layout/Content.vue";
-import MobileMenu from "~/ui/Layout/MobileMenu";
-import Transport from "~/components/Transport";
+import MobileMenu from "~/ui/Layout/MobileMenu.vue";
+import Transport from "~/components/Transport/Index.vue";
 export default {
   components: {
     Modal,

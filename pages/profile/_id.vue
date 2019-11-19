@@ -3,7 +3,7 @@
 </template>
 
 <script>
-import UserCard from "~/components/Cards/User";
+import UserCard from "~/components/Cards/User.vue";
 export default {
   // layout: "dashboard",
   components: {

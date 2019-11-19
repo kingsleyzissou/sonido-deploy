@@ -51,8 +51,8 @@
 </template>
 
 <script>
-import Analysis from "~/components/Track/Analysis";
-import Features from "~/components/Track/Features";
+import Analysis from "~/components/Track/Analysis.vue";
+import Features from "~/components/Track/Features.vue";
 import createArtistLink from "~/assets/js/createArtistLink";
 
 export default {

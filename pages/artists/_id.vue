@@ -26,12 +26,12 @@
 
 <script>
 import numbro from "numbro";
-import ArtistCard from "~/components/Cards/Artist";
-import NewReleases from "~/components/NewReleases/Show";
-import Tracklist from "~/components/Tracklist";
-import Similar from "~/components/Artist/Similar";
-import Albums from "~/components/Artist/Albums";
-import Bio from "~/components/Artist/Bio";
+import ArtistCard from "~/components/Cards/Artist.vue";
+import NewReleases from "~/components/NewReleases/Show.vue";
+import Tracklist from "~/components/Tracklist/Index.vue";
+import Similar from "~/components/Artist/Similar.vue";
+import Albums from "~/components/Artist/Albums.vue";
+import Bio from "~/components/Artist/Bio.vue";
 
 export default {
   layout: "dashboard",

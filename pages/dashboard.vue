@@ -49,10 +49,10 @@
   </fragment>
 </template>
 <script>
-import Chartlist from "~/components/Chartlist";
-import Featured from "~/components/Featured";
-import Recommendations from "~/components/Recommendations";
-import NewReleases from "~/components/NewReleases";
+import Chartlist from "~/components/Chartlist/Index.vue";
+import Featured from "~/components/Featured/Index.vue";
+import Recommendations from "~/components/Recommendations/Index.vue";
+import NewReleases from "~/components/NewReleases/Index.vue";
 
 export default {
   layout: "dashboard",

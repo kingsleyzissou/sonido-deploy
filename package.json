@@ -19,6 +19,7 @@
     "@nuxtjs/axios": "^5.8.0",
     "@nuxtjs/bulma": "^1.2.1",
     "@nuxtjs/dotenv": "^1.4.1",
+    "@nuxtjs/now-builder": "^0.16.6",
     "@saeris/vue-spinners": "^1.0.8",
     "chart.js": "^2.9.2",
     "colorthief": "^2.3.0",

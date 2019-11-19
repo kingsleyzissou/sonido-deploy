@@ -1,1 +1,0 @@
-(window.webpackJsonp=window.webpackJsonp||[]).push([[10],{418:function(t,n,e){"use strict";e.r(n);var o={auth:!1,mounted:function(){this.$auth.logout()}},l=e(3),component=Object(l.a)(o,(function(){var t=this.$createElement,n=this._self._c||t;return n("fragment",[n("h1",[this._v("Logged out")])])}),[],!1,null,null,null);n.default=component.exports}}]);
